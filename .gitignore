@@ -1,0 +1,25 @@
+# Credentials: never commit these. Use Databricks Secrets instead.
+.env
+*.env
+secrets*
+credentials*
+*.pem
+
+# Local data files: raw data belongs in a Unity Catalog Volume, not in git
+data/
+*.csv
+*.parquet
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Databricks
+.databricks/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,44 @@
+# Project title
+
+*DAT 342 Data Engineering, Fall 2026. Replace this line with your name.*
+
+One or two sentences describing what your pipeline does and what question(s) its Gold layer answers.
+
+## Data sources
+
+| Source | Type | Ingestion method | Link |
+|--------|------|------------------|------|
+| *e.g. Open-Meteo forecast API* | API | `requests`, paginated JSON | *link* |
+| *e.g. County parcel records* | File (CSV) | Batch read from a Volume | *link* |
+| *e.g. Inventory table in Supabase* | Database (SQL) | JDBC | *link* |
+
+## Architecture
+
+Describe (or diagram) how data flows from each source through Bronze, Silver, and Gold. Keep this section current as your pipeline grows: by the end of the semester it should describe the finished pipeline.
+
+## Repository layout
+
+```
+00_setup.py            Creates the final_project catalog, schemas, and landing Volume
+bronze/                One notebook per source, landing raw data into bronze
+silver/                Cleaning, validation, and conformed tables
+gold/                  Dimensional model and summary tables
+PROPOSAL.md            Your Sprint 01 project proposal
+```
+
+Add folders as you need them (for example, `jobs/` for Workflow definitions in Sprint 04).
+
+## How to run
+
+1. Run `00_setup.py` once.
+2. Run the Bronze notebooks, then Silver, then Gold.
+
+Update these steps as your pipeline changes. Someone who has never seen your project should be able to rebuild it from these instructions, given access to your credentials.
+
+## Credentials
+
+This repository must never contain passwords, API keys, or connection strings. All credentials live in Databricks Secrets (scope `dat342`, the same scope you created in Lesson 05). List the secret *keys* your notebooks expect here, but never their values:
+
+| Secret key | Used by |
+|------------|---------|
+| *e.g. `project-api-key`* | `bronze/bronze_api.py` |
