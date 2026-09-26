@@ -19,10 +19,11 @@ Describe (or diagram) how data flows from each source through Bronze, Silver, an
 ## Repository layout
 
 ```
-00_setup.py            Creates the final_project catalog, schemas, and landing Volume
-bronze/                One notebook per source, landing raw data into bronze
+setup_catalog.py       Creates the final_project catalog, schemas, and landing Volume
+bronze/                One script per source, landing raw data into bronze
 silver/                Cleaning, validation, and conformed tables
 gold/                  Dimensional model and summary tables
+eda/                   Exploratory notebook(s) on your Silver tables (Sprint 03)
 PROPOSAL.md            Your Sprint 01 project proposal
 ```
 
@@ -30,14 +31,18 @@ Add folders as you need them (for example, `jobs/` for Workflow definitions in S
 
 ## How to run
 
-1. Run `00_setup.py` once.
-2. Run the Bronze notebooks, then Silver, then Gold.
+1. Run `setup_catalog.py` once.
+2. Run the Bronze scripts, then Silver, then Gold.
 
 Update these steps as your pipeline changes. Someone who has never seen your project should be able to rebuild it from these instructions, given access to your credentials.
 
+## Dashboard
+
+Add a screenshot of your Gold-layer dashboard here in Sprint 05.
+
 ## Credentials
 
-This repository must never contain passwords, API keys, or connection strings. All credentials live in Databricks Secrets (scope `dat342`, the same scope you created in Lesson 05). List the secret *keys* your notebooks expect here, but never their values:
+This repository must never contain passwords, API keys, or connection strings. All credentials live in Databricks Secrets (scope `dat342`, the same scope you created in Lesson 05). List the secret *keys* your code expects here, but never their values:
 
 | Secret key | Used by |
 |------------|---------|
