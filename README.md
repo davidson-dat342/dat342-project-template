@@ -22,6 +22,8 @@ Describe (or diagram) how data flows from each source through Bronze, Silver, an
 setup_catalog.py       Creates the final_project catalog, schemas, and landing Volume
 bronze/                One script per source, landing raw data into bronze
 silver/                Cleaning, validation, and conformed tables
+  quality_rules.yml    Your data quality rules, one section per Silver table
+  quality.py           Loads and applies quality_rules.yml (no need to edit)
 gold/                  Dimensional model and summary tables
 eda/                   Exploratory notebook(s) on your Silver tables (Sprint 03)
 PROPOSAL.md            Your Sprint 01 project proposal
@@ -35,6 +37,10 @@ Add folders as you need them (for example, `jobs/` for Workflow definitions in S
 2. Run the Bronze scripts, then Silver, then Gold.
 
 Update these steps as your pipeline changes. Someone who has never seen your project should be able to rebuild it from these instructions, given access to your credentials.
+
+## Data quality
+
+Data quality rules live in `silver/quality_rules.yml`, not in code. Each Silver script loads its table's rules and applies them with `silver/quality.py`, sending rows that fail a rule to a quarantine table. To add or change a rule, edit the YAML file. Summarize here what your rules check for and where quarantined rows end up.
 
 ## Dashboard
 

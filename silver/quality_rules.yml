@@ -1,0 +1,39 @@
+# Data quality rules for your Silver layer, read by quality.py.
+#
+# One section per table under `tables:`, keyed by the name your Silver script
+# passes to load_rules(). Each section has:
+#
+#   max_quarantine_pct  If more than this percent of a run's rows fail a rule,
+#                       check_quarantine_rate() stops the run before anything is
+#                       written. Pick it from what you know about the source, and
+#                       justify it in a comment.
+#   rules               An ordered list. Each rule has exactly two keys:
+#                         label:      a short failure label, written to quality_flag
+#                         condition:  a Spark SQL condition that is TRUE when a row
+#                                     FAILS the rule
+#
+# The first failing rule wins, so put the most fundamental checks first: nulls
+# before ranges, and checks against other tables last.
+#
+# Replace the example below with your own tables. Cover at least one rule each
+# for completeness, validity, and consistency per table.
+
+tables:
+
+  example_orders:
+    # The export has been about 0.5% bad on a normal day; 2% means something broke.
+    max_quarantine_pct: 2.0
+    rules:
+      # Completeness
+      - label: null_order_id
+        condition: order_id IS NULL
+      - label: null_order_date
+        condition: order_date IS NULL
+      # Validity
+      - label: invalid_quantity
+        condition: quantity <= 0
+      - label: invalid_status
+        condition: status NOT IN ('placed', 'shipped', 'delivered', 'cancelled')
+      # Consistency
+      - label: shipped_before_ordered
+        condition: ship_date < order_date
